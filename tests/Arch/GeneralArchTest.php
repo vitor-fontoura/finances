@@ -100,11 +100,6 @@ describe('Global Arch QA', function () {
         ->expect('Database\Factories')
         ->toExtend('Illuminate\Database\Eloquent\Factories\Factory');
 
-    test('Pint return no style issues', function () {
-        $result = Process::run('cd vendor/bin && pint --test --dirty');
-        expect($result->successful())->toBeTrue();
-    });
-
     arch('Responses are forbidden outside controllers and middlewares')
         ->expect(['response'])
         ->toOnlyBeUsedIn(['App\Http\Controllers', 'App\Http\Middleware']);

@@ -63,5 +63,8 @@ jobs:
       - name: Run Type Analysis
         run: composer types:check
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: Run Tests
-        run: php artisan test
+        run: php artisan test --parallel

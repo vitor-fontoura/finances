@@ -25,6 +25,15 @@ class DataTableTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_transaction_datatable_can_search_related_columns(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get(route('transactions', ['current_team' => $user->currentTeam->slug]).'?s=category')
+            ->assertSuccessful();
+    }
+
     public function test_transaction_can_be_created(): void
     {
         $user = User::factory()->create();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Concerns;
 
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,22 +13,40 @@ use Illuminate\Support\Str;
 
 trait JoinsRelations
 {
+    /**
+     * @param  Builder<Transaction>  $query
+     * @return Builder<Transaction>
+     */
     public function scopeLeftJoinRelation(Builder $query, string $relation): Builder
     {
         return $this->joinRelations($query, $relation, 'left');
     }
 
-    public function scopeLeftJoinRelations(Builder $query, array $relations)
+    /**
+     * @param  Builder<Transaction>  $query
+     * @param  array<int|string, string>  $relations
+     * @return Builder<Transaction>
+     */
+    public function scopeLeftJoinRelations(Builder $query, array $relations): Builder
     {
         return $this->joinRelations($query, $relations, 'left');
     }
 
-    public function scopeJoinRelation(Builder $query, string $relation)
+    /**
+     * @param  Builder<Transaction>  $query
+     * @return Builder<Transaction>
+     */
+    public function scopeJoinRelation(Builder $query, string $relation): Builder
     {
         return $this->joinRelations($query, $relation, 'inner');
     }
 
-    public function scopeJoinRelations(Builder $query, array $relations)
+    /**
+     * @param  Builder<Transaction>  $query
+     * @param  array<int|string, string>  $relations
+     * @return Builder<Transaction>
+     */
+    public function scopeJoinRelations(Builder $query, array $relations): Builder
     {
         return $this->joinRelations($query, $relations, 'inner');
     }
@@ -36,8 +55,10 @@ trait JoinsRelations
      * Automatically joins related tables (including nested relations) into the main query.
      * Performance priority: solves N+1 by merging multiple relations into a single SQL query.
      *
-     * @param  array|string  $relations  Relation paths (e.g. 'user.profile' or ['posts' => 'p'])
+     * @param  Builder<Transaction>  $query
+     * @param  array<int|string, string>|string  $relations  Relation paths (e.g. 'user.profile' or ['posts' => 'p'])
      * @param  string  $joinType  'left' or 'inner'
+     * @return Builder<Transaction>
      */
     private function joinRelations(Builder $query, array|string $relations, string $joinType = 'left'): Builder
     {

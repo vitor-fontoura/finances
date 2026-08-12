@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+    /** @use HasFactory<AccountFactory> */
     use HasFactory, HasTransactions;
 
     protected $fillable = [

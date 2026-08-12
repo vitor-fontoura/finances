@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    /** @use HasFactory<ScheduleFactory> */
     use HasAccount, HasCategory, HasFactory, HasTransactions;
 
     protected $fillable = [

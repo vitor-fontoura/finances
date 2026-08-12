@@ -9,11 +9,13 @@ use App\Concerns\HasCategory;
 use App\Concerns\HasSchedule;
 use App\Concerns\JoinsRelations;
 use App\Types\TransactionType;
+use Database\Factories\TransactionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    /** @use HasFactory<TransactionFactory> */
     use HasAccount, HasCategory, HasFactory, HasSchedule, JoinsRelations;
 
     protected $fillable = [

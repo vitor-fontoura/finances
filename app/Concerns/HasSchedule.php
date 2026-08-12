@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait HasSchedule
 {
+    /**
+     * @return BelongsTo<Schedule, $this>
+     */
     public function schedule(): BelongsTo
     {
         return $this->belongsTo(Schedule::class);

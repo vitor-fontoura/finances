@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Schedule;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Schedule>
+ */
 class ScheduleFactory extends Factory
 {
     public function definition(): array

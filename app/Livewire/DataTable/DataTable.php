@@ -6,16 +6,23 @@ namespace App\Livewire\DataTable;
 
 use App\Concerns\JoinsRelations;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+/**
+ * @template TModel of Model
+ */
 abstract class DataTable extends Component
 {
     use WithPagination;
 
+    /**
+     * @var array<int, array{field: string, title: string, sortable: bool, searchable: bool, hidden: bool, class: string, component: ?string}>
+     */
     public array $columns = [];
 
     // =========================================
@@ -47,6 +54,9 @@ abstract class DataTable extends Component
      * Build and return the query for this table.
      *
      * Can include scopes, joins, auth filters, etc.
+     */
+    /**
+     * @return Builder<TModel>
      */
     abstract public function query(): Builder;
 
@@ -96,6 +106,9 @@ abstract class DataTable extends Component
     // Selection state
     // =========================================
 
+    /**
+     * @var array<int, int|string>
+     */
     public array $selected = [];
 
     // =========================================
@@ -119,6 +132,9 @@ abstract class DataTable extends Component
     // Data methods
     // =========================================
 
+    /**
+     * @return LengthAwarePaginator<int, TModel>
+     */
     public function data(): LengthAwarePaginator
     {
         $searchableColumns = collect($this->columns)
@@ -129,9 +145,6 @@ abstract class DataTable extends Component
         $query = $this->query();
         $hasSearch = $this->search && ! empty($searchableColumns);
 
-        /**
-         * @var \Illuminate\Database\Eloquent\Model;
-         */
         $model = $query->getModel();
         $joinedTables = collect($query->getQuery()->joins)->map(fn ($join) => $join->table);
 
@@ -147,7 +160,9 @@ abstract class DataTable extends Component
                         return;
                     }
                     // Scope from JoinsRelations
-                    $query->leftJoinRelation($relation);
+                    if (method_exists($model, 'scopeLeftJoinRelation')) {
+                        $model->scopeLeftJoinRelation($query, $relation);
+                    }
                 });
         }
 
@@ -161,7 +176,7 @@ abstract class DataTable extends Component
                     }
                 });
             })
-            ->orderBy($this->sortBy, $this->sortDirection);
+            ->orderBy($this->sortBy, $this->sortDirection === 'desc' ? 'desc' : 'asc');
 
         return $query->paginate($this->perPage);
     }
@@ -174,7 +189,7 @@ abstract class DataTable extends Component
     public function visibleCount(): int
     {
         return collect($this->columns)
-            ->filter(fn (array $col) => ! ($col['hidden'] ?? false))
+            ->filter(fn (array $col) => ! $col['hidden'])
             ->count();
     }
 

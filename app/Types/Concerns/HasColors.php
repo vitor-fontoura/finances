@@ -9,23 +9,24 @@ use Illuminate\Support\Str;
 
 trait HasColors
 {
+    /**
+     * @return array<int, array{label: ?string, value: int|string}>
+     */
     public static function getColors(): array
     {
-        $key = is_subclass_of(static::class, BackedEnum::class) ? 'value' : 'name';
-
-        return array_map(fn ($value) => [
+        return array_map(fn (BackedEnum $value) => [
             'label' => self::getColorFor($value),
-            'value' => $value->$key,
+            'value' => $value->value,
         ], self::cases());
     }
 
-    public static function getColorFor($value): ?string
+    public static function getColorFor(?BackedEnum $value): ?string
     {
-        if (empty($value)) {
+        if ($value === null) {
             return '';
         }
 
-        $snakeClassName = Str::snake(substr(strrchr(self::class, '\\'), 1));
+        $snakeClassName = Str::snake(class_basename(self::class));
 
         $translationKey = implode('.', [
             'types',

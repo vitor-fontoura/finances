@@ -1,0 +1,66 @@
+<?php
+
+return [
+    'account' => [
+        'title' => 'Contas',
+        'title_singular' => 'Conta',
+        'subtitle' => 'Gerencie suas contas financeiras',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Conta',
+            'type' => 'Tipo',
+            'initial_balance' => 'Saldo Inicial',
+            'acct_id' => 'ID da Conta Financeira',
+            'currency' => 'Moeda',
+            'created_at' => 'Criado em',
+            'updated_at' => 'Atualizado em',
+        ],
+    ],
+    'category' => [
+        'title' => 'Categorias',
+        'title_singular' => 'Categoria',
+        'subtitle' => 'Gerencie suas categorias de transações',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Título',
+            'type' => 'Tipo',
+            'matcher' => 'Matcher',
+            'hidden' => 'Oculto',
+            'created_at' => 'Criado em',
+            'updated_at' => 'Atualizado em',
+        ],
+    ],
+    'schedule' => [
+        'title' => 'Programações',
+        'title_singular' => 'Programação',
+        'subtitle' => 'Gerencie suas transações programadas',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Título',
+            'amount' => 'Valor',
+            'type' => 'Tipo',
+            'variant' => 'Variante',
+            'start_date' => 'Data de Início',
+            'end_date' => 'Data de Término',
+            'installments' => 'Parcelas',
+            'matcher' => 'Matcher',
+            'created_at' => 'Criado em',
+            'updated_at' => 'Atualizado em',
+        ],
+    ],
+    'transaction' => [
+        'title' => 'Transações',
+        'title_singular' => 'Transação',
+        'subtitle' => 'Gerencie suas transações',
+        'fields' => [
+            'id' => 'ID',
+            'description' => 'Descrição',
+            'amount' => 'Valor',
+            'date' => 'Data',
+            'type' => 'Tipo',
+            'origin' => 'Origem',
+            'created_at' => 'Criado em',
+            'updated_at' => 'Atualizado em',
+        ],
+    ],
+];

@@ -1,0 +1,66 @@
+<?php
+
+return [
+    'account' => [
+        'title' => 'Accounts',
+        'title_singular' => 'Account',
+        'subtitle' => 'Manage your financial accounts',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Title',
+            'type' => 'Type',
+            'initial_balance' => 'Initial Balance',
+            'acct_id' => 'Financial Account ID',
+            'currency' => 'Currency',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
+    ],
+    'category' => [
+        'title' => 'Categories',
+        'title_singular' => 'Category',
+        'subtitle' => 'Manage your transaction categories',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Title',
+            'type' => 'Type',
+            'matcher' => 'Matcher',
+            'hidden' => 'Hidden',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
+    ],
+    'schedule' => [
+        'title' => 'Schedules',
+        'title_singular' => 'Schedule',
+        'subtitle' => 'Manage your scheduled transactions',
+        'fields' => [
+            'id' => 'ID',
+            'title' => 'Title',
+            'amount' => 'Amount',
+            'type' => 'Type',
+            'variant' => 'Variant',
+            'start_date' => 'Start Date',
+            'end_date' => 'End Date',
+            'installments' => 'Installments',
+            'matcher' => 'Matcher',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
+    ],
+    'transaction' => [
+        'title' => 'Transactions',
+        'title_singular' => 'Transaction',
+        'subtitle' => 'Manage your transactions',
+        'fields' => [
+            'id' => 'ID',
+            'description' => 'Description',
+            'amount' => 'Amount',
+            'date' => 'Date',
+            'type' => 'Type',
+            'origin' => 'Origin',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
+    ],
+];
